@@ -63,7 +63,10 @@ public class ProductServiceImpl implements ProductService {
 				// .body(BodyInserters.fromObject(p))
 				.bodyValue(Mapper.mapToClient(p))
 				.retrieve()
-				.bodyToMono(Product.class);
+				.bodyToMono(Producto.class)
+				.map(response ->  {
+					return Mapper.mapToProduct(response);
+				});
 			
 				
 	}
@@ -78,7 +81,9 @@ public class ProductServiceImpl implements ProductService {
 				.contentType(APPLICATION_JSON)
 				.bodyValue(Mapper.mapToClient(p))
 				.retrieve()
-				.bodyToMono(Product.class);
+				.bodyToMono(Producto.class).map(response ->  {
+					return Mapper.mapToProduct(response);
+				});
 	}
 
 	@Override
